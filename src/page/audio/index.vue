@@ -112,6 +112,12 @@
                      @click="onCancelClick">
             CANCEL
           </el-button>
+          <el-button v-if="form.sound_file"
+                     size="small"
+                     type="success"
+                     @click="onDownloadClick">
+            下载录音
+          </el-button>
         </template>
       </van-field>
       <div class="submit-button">
@@ -158,6 +164,7 @@ const isHttps = () => {
   return location.protocol === 'https:'
 }
 export default {
+  components: {},
   computed: {
     url() {
       const useProxy = this.useProxy
@@ -239,7 +246,9 @@ export default {
       }
     },
     onDownloadClick() {
-      window.open(this.fileUrl, '__blank')
+      //  window.open(this.fileUrl, '__blank')
+      const { sound_file } = this.form
+      this.saveAudio(sound_file)
     },
     async startRecord() {
       this.audioURL = ''
@@ -296,6 +305,19 @@ export default {
       }
       this.cancelSource = null
     },
+    saveAudio(sound_file) {
+      // 假设你有一个File对象
+      // 创建一个Blob URL来作为下载链接的href
+      const blobUrl = URL.createObjectURL(sound_file)
+      // 创建一个a标签并设置其href和下载属性
+      const downloadLink = document.createElement('a')
+      downloadLink.href = blobUrl
+      downloadLink.download = sound_file.name
+      // 触发下载
+      downloadLink.click()
+      // 除Blob URL
+      URL.revokeObjectURL(blobUrl)
+    },
     // 上传文件
     async uploadFileRequest(form) {
       this.posting = true
@@ -312,6 +334,8 @@ export default {
       const formData = new FormData()
       console.error('-- sound_file --', sound_file.size)
       formData.append('sound_file', sound_file)
+      console.error(sound_file)
+      // this.saveAudio(sound_file)
       const keys = Object.keys(form)
       const igs = ['path', 'host', 'sound_file']
       for (const key of keys) {
