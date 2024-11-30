@@ -1,5 +1,10 @@
 <template>
   <div class="data-form">
+    <div v-show="false"
+         class="download">
+      <a id="fileSys-download"
+         ref="fileSys-download"></a>
+    </div>
     <div class="url">url: {{url}}</div>
     <div v-if="!recording && audioURL"
          class="video-ppo">
@@ -124,15 +129,20 @@
                     :loading="posting"
                     :disabled="!form.sound_file"
                     native-type="submit">
-          发 送
+          发 送 <span v-if="fileSize">({{fileSize}}kb)</span>
         </van-button>
       </div>
       <div v-if="backUrl"
            class="back-video video-ppo">
+        <span v-if="resSize">({{resSize}}kb)</span>
         <audio :src="backUrl"
                controls />
       </div>
     </van-form>
+    <van-button type="primary"
+                @click="downloadFile">
+      下载
+    </van-button>
     <div v-if="resData"
          class="resData">
       {{resData}}
@@ -176,13 +186,13 @@ export default {
         conversation_id: '',
         sound_file: null
       },
-      //raw / wav / mp3 / ogg
-      audoType: 'audio/mp3',
+      audoType: 'audio/webm',
       audoTypes: [
+        { text: 'audio/webm', key: 'audio/webm', suffix: 'webm' },
+        { text: 'audio/ogg', key: 'audio/ogg', suffix: 'ogg' },
         { text: 'audio/mp3', key: 'audio/mp3', suffix: 'mp3' },
         { text: 'audio/wav', key: 'audio/wav', suffix: 'wav' },
-        { text: 'audio/raw', key: 'audio/raw', suffix: 'raw' },
-        { text: 'audio/ogg', key: 'audio/ogg', suffix: 'ogg' }
+        { text: 'audio/raw', key: 'audio/raw', suffix: 'raw' }
       ],
       recording: false,
       showPopover: false,
@@ -193,7 +203,10 @@ export default {
       ging: false,
       resData: null,
       useProxy: isHttps(),
-      backUrl: ''
+      backUrl: '',
+      fileSize: '',
+      resSize: '',
+      ppoerror: ''
     }
   },
   methods: {
@@ -225,38 +238,46 @@ export default {
       window.open(this.fileUrl, '__blank')
     },
     async startRecord() {
-      this.blobChunks = []
       this.audioURL = ''
       this.fileUrl = ''
+      const audoType = this.audoTypes.find(_item => _item.key === this.audoType)
+      if (!audoType) return
       try {
         const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
-        this.mediaRecorder = new MediaRecorder(stream)
+        this.mediaRecorder = new MediaRecorder(stream, { mimeType: audoType.key })
+        const chunks = []
         this.mediaRecorder.ondataavailable = event => {
+          console.error(event)
           if (event.data.size > 0) {
-            this.blobChunks.push(event.data)
+            chunks.push(event.data)
           }
+          console.error('ondataavailable')
         }
-        const audoType = this.audoTypes.find(_item => _item.key === this.audoType)
-        if (!audoType) return
         this.mediaRecorder.onstop = () => {
-          const blob = new Blob(this.blobChunks, { type: audoType.key })
-          const url = URL.createObjectURL(blob)
-          this.audioURL = url
-          const file = blobToFile(blob, `${Date.now()}.${audoType.suffix}`)
-          this.form.sound_file = file
+          if (chunks.length > 0) {
+            const blob = new Blob(chunks, { type: audoType.key })
+            const url = URL.createObjectURL(blob)
+            this.audioURL = url
+            const file = blobToFile(blob, `${Date.now()}.${audoType.suffix}`)
+            console.error('file', file)
+            this.form.sound_file = file
+            this.fileSize = (file.size / 1024).toFixed(2)
+            Toast('录音结束!')
+          } else {
+            Toast('录音无效!')
+          }
         }
         this.mediaRecorder.start()
         this.recording = true
         Toast('开始录音')
       } catch (error) {
+        Notify({ type: 'danger', message: '录音初始化失败!录音格式不支持!' })
         console.error('Error accessing microphone:', error)
       }
     },
     async stopRecord() {
-      Toast('录音结束!')
       if (this.mediaRecorder && this.recording) {
         this.mediaRecorder.stop()
-        Toast('录音结束!')
       }
       this.recording = false
     },
@@ -280,6 +301,7 @@ export default {
       const useProxy = this.useProxy
       const url = useProxy ? `${proxyAPI}/${path}?audo_type=${audoType}` : `${host}/${path}?audo_type=${audoType}`
       const formData = new FormData()
+      console.error('-- sound_file --', sound_file.size)
       formData.append('sound_file', sound_file)
       const keys = Object.keys(form)
       const igs = ['path', 'host', 'sound_file']
@@ -291,12 +313,22 @@ export default {
       this.stopRequest()
       try {
         this.cancelSource = CancelToken.source()
-        const res = await request({ type: 'upload_mpeg', url, data: formData, source: this.cancelSource })
-        console.error(res)
-        const audioBlob = res.data
-        const audioUrl = URL.createObjectURL(audioBlob)
-        this.backUrl = audioUrl
+        const res = await request({ type: 'UPLOAD_MPEG', url, data: formData, source: this.cancelSource })
         Toast.success('请求成功!')
+        let aLink = window.document.getElementById('fileSys-download')
+        console.log(aLink)
+        if (!aLink) {
+          aLink = document.createElement('a')
+          document.body.appendChild(aLink)
+        }
+        const blob = new Blob([res.data], {
+          type: 'audio/mpeg'
+        })
+        const resFile = blobToFile(blob, `${Date.now()}.mpeg`)
+        this.resSize = resFile ? resFile.size : 0
+        aLink.href = URL.createObjectURL(blob)
+        aLink.download = `${Date.now()}.mpeg`
+        aLink.click()
       } catch (error) {
         if (axios.isCancel(error)) {
           console.log('Request canceled', error.message)
@@ -313,11 +345,32 @@ export default {
         this.posting = false
         this.cancelSource = null
       }
+    },
+    async downloadFile() {
+      try {
+        const url =
+          'http://filesystem-api.sdhscloud.com/api/v1/filesystem/download/603eb664-aeec-11ef-8592-daa9a34ec6a1?container_name=audio&isCeche=1'
+        const res = await request({ type: 'download', url, data: {}, source: null })
+        let aLink = window.document.getElementById('fileSys-download')
+        console.log(aLink)
+        if (!aLink) {
+          aLink = document.createElement('a')
+          document.body.appendChild(aLink)
+        }
+        const blob = new Blob([res.data], {
+          type: 'audio/mp3'
+        })
+        const resFile = blobToFile(blob, `${Date.now()}.mp3`)
+        this.resSize = resFile ? resFile.size : 0
+        aLink.href = URL.createObjectURL(blob)
+        aLink.download = `${Date.now()}.mp3`
+        aLink.click()
+      } catch (error) {
+        console.log(error)
+      }
     }
   },
-  created() {
-    this.blobChunks = []
-  }
+  created() {}
 }
 </script>
 <style lang="scss">

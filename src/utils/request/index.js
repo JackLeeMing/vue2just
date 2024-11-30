@@ -95,7 +95,7 @@ export default async ({ type = 'GET', url, data = null, progress = null, source 
         url: url,
         data: data,
         method: 'POST',
-        responseType: 'blob',
+        responseType: 'arraybuffer',
         headers: {
           'Content-Type': 'multipart/form-data'
           // Accept: 'audio/mpeg'
