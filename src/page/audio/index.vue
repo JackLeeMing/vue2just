@@ -114,8 +114,8 @@
           </el-button>
           <el-button v-if="form.sound_file"
                      size="small"
-                     type="success"
-                     @click="onDownloadClick">
+                     type="primary"
+                     @click="onDownloadRecordClick">
             下载录音
           </el-button>
         </template>
@@ -132,9 +132,15 @@
       </div>
       <div v-if="backUrl"
            class="back-video video-ppo">
-        <span v-if="resSize">({{resSize}}kb)</span>
+        <el-button v-if="resFile"
+                   size="small"
+                   type="success"
+                   @click="onDownloadResultClick">
+          下载结果
+        </el-button>
         <audio :src="backUrl"
                controls />
+        <span v-if="resSize">({{resSize}}kb)</span>
       </div>
     </van-form>
     <van-button v-if="false"
@@ -217,7 +223,8 @@ export default {
       resSize: '',
       ppoerror: '',
       browerType: '',
-      agent: ''
+      agent: '',
+      resFile: null
     }
   },
   methods: {
@@ -245,12 +252,17 @@ export default {
         this.startRecord()
       }
     },
-    onDownloadClick() {
+    onDownloadRecordClick() {
       //  window.open(this.fileUrl, '__blank')
       const { sound_file } = this.form
       this.saveAudio(sound_file)
     },
+    onDownloadResultClick() {
+      this.saveAudio(this.resFile)
+    },
     async startRecord() {
+      this.resFile = null
+      this.form.sound_file = null
       this.audioURL = ''
       this.fileUrl = ''
       const audoType = this.audoTypes.find(_item => _item.key === this.audoType)
@@ -334,7 +346,6 @@ export default {
       const formData = new FormData()
       console.error('-- sound_file --', sound_file.size)
       formData.append('sound_file', sound_file)
-      console.error(sound_file)
       // this.saveAudio(sound_file)
       const keys = Object.keys(form)
       const igs = ['path', 'host', 'sound_file']
@@ -348,22 +359,20 @@ export default {
         this.cancelSource = CancelToken.source()
         const res = await request({ type: 'UPLOAD_MPEG', url, data: formData, source: this.cancelSource })
         Toast.success('请求成功!')
-        let aLink = window.document.getElementById('fileSys-download')
-        console.log(aLink)
-        if (!aLink) {
-          aLink = document.createElement('a')
-          document.body.appendChild(aLink)
-        }
+        this.form.conversation_id = res.headers['conversation_id'] || ''
         const blob = new Blob([res.data], {
           type: 'audio/mpeg'
         })
         const _url = URL.createObjectURL(blob)
         this.backUrl = _url
         const resFile = blobToFile(blob, `${Date.now()}.mpeg`)
-        this.resSize = resFile ? resFile.size : 0
-        aLink.href = URL.createObjectURL(blob)
-        aLink.download = `${Date.now()}.mpeg`
-        aLink.click()
+        const resSize = resFile ? resFile.size : 0
+        if (resSize) {
+          this.resSize = resSize
+          this.resFile = resFile
+        } else {
+          Toast.fail('响应失败，返回内容为空!')
+        }
       } catch (error) {
         if (axios.isCancel(error)) {
           console.log('Request canceled', error.message)
