@@ -115,3 +115,18 @@ export function getTabs(projectName) {
   }
   return BaseTabs
 }
+
+export function getBrowserType() {
+  const userAgent = navigator.userAgent
+  if (userAgent.includes('Firefox')) {
+    return 'Firefox'
+  } else if (userAgent.includes('Chrome') && !userAgent.includes('Edg')) {
+    return 'Chrome'
+  } else if (userAgent.includes('Safari') && !userAgent.includes('Chrome')) {
+    return 'Safari'
+  } else if (userAgent.includes('Edg')) {
+    return 'Edge'
+  } else {
+    return 'Other'
+  }
+}

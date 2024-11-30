@@ -87,14 +87,6 @@
                  clearable
                  :rules="[{ required: true, message: '请填写user_id' }]">
       </van-field>
-      <van-field v-model="form.bot_id"
-                 name="bot_id"
-                 label="bot_id"
-                 placeholder="bot_id"
-                 required
-                 clearable
-                 :rules="[{ required: true, message: '请填写bot_id' }]">
-      </van-field>
       <van-field v-model="form.conversation_id"
                  name="conversation_id"
                  label="conversation_id"
@@ -129,7 +121,7 @@
                     :loading="posting"
                     :disabled="!form.sound_file"
                     native-type="submit">
-          发 送 <span v-if="fileSize">({{fileSize}}kb)</span>
+          【{{browerType}}】发 送 <span v-if="fileSize">({{fileSize}}kb)</span>
         </van-button>
       </div>
       <div v-if="backUrl"
@@ -139,7 +131,8 @@
                controls />
       </div>
     </van-form>
-    <van-button type="primary"
+    <van-button v-if="false"
+                type="primary"
                 @click="downloadFile">
       下载
     </van-button>
@@ -147,6 +140,7 @@
          class="resData">
       {{resData}}
     </div>
+    <div class="agent">{{agent}}</div>
   </div>
 </template>
 
@@ -154,6 +148,7 @@
 export function blobToFile(blob, fileName) {
   return new File([blob], fileName, { type: blob.type })
 }
+import { getBrowserType } from '@/utils/lib.js'
 import request from '@/utils/request/index.js'
 import { Toast, Notify } from 'vant'
 import axios from 'axios'
@@ -171,6 +166,14 @@ export default {
     },
     locHost() {
       return proxyAPI
+    },
+    isSafari() {
+      const browerType = this.browerType
+      return browerType === 'Safari'
+    },
+    isFirefox() {
+      const browerType = this.browerType
+      return browerType === 'Firefox'
     }
   },
   data() {
@@ -182,15 +185,14 @@ export default {
         stt_type: 'stt1',
         tts_type: 'tts1',
         user_id: 'mihua001',
-        bot_id: '11',
         conversation_id: '',
         sound_file: null
       },
       audoType: 'audio/webm',
       audoTypes: [
-        { text: 'audio/webm', key: 'audio/webm', suffix: 'webm' },
-        { text: 'audio/ogg', key: 'audio/ogg', suffix: 'ogg' },
-        { text: 'audio/mp3', key: 'audio/mp3', suffix: 'mp3' },
+        { text: 'audio/webm [ALL]', key: 'audio/webm', suffix: 'webm' },
+        { text: 'audio/ogg [Firefox]', key: 'audio/ogg', suffix: 'ogg' },
+        { text: 'audio/mp3 [Safari]', key: 'audio/mp3', suffix: 'mp3' },
         { text: 'audio/wav', key: 'audio/wav', suffix: 'wav' },
         { text: 'audio/raw', key: 'audio/raw', suffix: 'raw' }
       ],
@@ -206,7 +208,9 @@ export default {
       backUrl: '',
       fileSize: '',
       resSize: '',
-      ppoerror: ''
+      ppoerror: '',
+      browerType: '',
+      agent: ''
     }
   },
   methods: {
@@ -244,7 +248,12 @@ export default {
       if (!audoType) return
       try {
         const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
-        this.mediaRecorder = new MediaRecorder(stream, { mimeType: audoType.key })
+        // { mimeType: audoType.key }
+        // const isSafari = this.isSafari
+        const isFirefox = this.isFirefox
+        this.mediaRecorder = isFirefox
+          ? new MediaRecorder(stream, { mimeType: audoType.key })
+          : new MediaRecorder(stream)
         const chunks = []
         this.mediaRecorder.ondataavailable = event => {
           console.error(event)
@@ -324,6 +333,8 @@ export default {
         const blob = new Blob([res.data], {
           type: 'audio/mpeg'
         })
+        const _url = URL.createObjectURL(blob)
+        this.backUrl = _url
         const resFile = blobToFile(blob, `${Date.now()}.mpeg`)
         this.resSize = resFile ? resFile.size : 0
         aLink.href = URL.createObjectURL(blob)
@@ -370,7 +381,21 @@ export default {
       }
     }
   },
-  created() {}
+  created() {},
+  mounted() {
+    this.browerType = getBrowserType()
+    let audoType = 'audio/webm'
+    switch (this.browerType) {
+      case 'Firefox':
+        audoType = 'audio/ogg'
+        break
+      case 'Safari':
+        audoType = 'audio/mp3'
+        break
+    }
+    this.agent = navigator.userAgent || ''
+    this.audoType = audoType
+  }
 }
 </script>
 <style lang="scss">
@@ -437,5 +462,13 @@ export default {
 .back-video {
   border: 1px solid #0fb6c6;
   border-radius: 4px;
+}
+.agent {
+  color: #acacac;
+  margin-top: 16px;
+  padding: 5px;
+  box-sizing: border-box;
+  text-align: center;
+  font-size: 12px;
 }
 </style>
