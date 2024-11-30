@@ -1,0 +1,36 @@
+image: docker-registry.thunics.com:5000/node:14.3.3
+before_script:
+  # owner 名字(需要修改)
+  - export OWNER="smartbow"
+  # 容器名称(需要修改)
+  - export CONTAINER_NAME="cmd-swift-web"
+  # 镜像tag 号 自动生成
+  - export TAG=${OWNER}_$(date +"%Y-%m-%d_" -d @$(git show -s --format=%ct $CI_COMMIT_SHA))${CI_COMMIT_SHA:0:10}
+  - export IMAGE_TAG=docker-registry.thunics.com:5000/${CONTAINER_NAME}:$TAG
+  # consul externalSetting.js 的 key
+  - export CONSUL_NAME="FE/${CONTAINER_NAME}"
+  # 这里是自己的项目占用的端口号(需要修改)
+  - export PORT=8111
+  - echo $OWNER $IMAGE_TAG $CONSUL_NAME
+
+stages:
+  - master_build
+
+# 必须执行 一般自动执行 执行 web 的打包和镜像制作
+master_build:
+  stage: master_build
+  cache:
+    paths:
+      # 配置缓存路径 加快部署速度
+      - node_modules/
+  script:
+    # 执行测试部署脚本
+    - chmod u+x ./master_build.sh
+    - ./master_build.sh
+  only:
+    - main
+    - main-next
+    - fl
+  #when: manual
+  tags:
+    - gitlab-runner-web01
