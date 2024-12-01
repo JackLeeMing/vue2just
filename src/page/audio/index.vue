@@ -502,7 +502,6 @@ export default {
 }
 .video-ppo {
   margin-top: 8px;
-  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -537,6 +536,7 @@ export default {
   margin-top: 8px;
   border: 1px solid #0fb6c6;
   border-radius: 4px;
+  box-sizing: border-box;
 }
 .agent {
   color: #acacac;
