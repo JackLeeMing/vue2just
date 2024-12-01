@@ -368,11 +368,10 @@ export default {
         forbidClick: false,
         message: '请求发送中...'
       })
-      const { path, host, sound_file, user_id, conversation_id } = form
+      const { path, host, sound_file, user_id } = form
       const audoType = this.audoType
       const useProxy = this.useProxy
       localStorage.setItem('user_id', user_id)
-      localStorage.setItem('conversation_id', conversation_id)
       const url = useProxy ? `${proxyAPI}/${path}?audo_type=${audoType}` : `${host}/${path}?audo_type=${audoType}`
       const formData = new FormData()
       formData.append('sound_file', sound_file)
@@ -389,7 +388,9 @@ export default {
         this.cancelSource = CancelToken.source()
         const res = await request({ type: 'UPLOAD_MPEG', url, data: formData, source: this.cancelSource })
         Toast.success('请求成功!')
-        this.form.conversation_id = res.headers['conversation_id'] || ''
+        const conversation_id = res.headers['conversation_id'] || ''
+        this.form.conversation_id = conversation_id
+        localStorage.setItem('conversation_id', conversation_id)
         const blob = new Blob([res.data], {
           type: 'audio/mpeg'
         })
