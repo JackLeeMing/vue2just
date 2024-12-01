@@ -65,7 +65,7 @@ export default {
 
 <style lang="scss">
 #app {
-  background: linear-gradient(180deg, #d8dde9 0%, #f6f6fc 100%);
+  background: linear-gradient(180deg, #d8dde9 0%, #e1e4ea 100%);
   width: 100%;
   height: 100vh;
   color: #323233;

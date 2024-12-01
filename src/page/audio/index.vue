@@ -5,11 +5,23 @@
       <a id="fileSys-download"
          ref="fileSys-download"></a>
     </div>
-    <div class="url">url: {{url}}</div>
+    <p class="url">url: {{url}}</p>
     <div v-if="!recording && audioURL"
          class="video-ppo">
       <audio :src="audioURL"
              controls />
+      <div>
+        <el-button v-if="form.sound_file"
+                   size="small"
+                   type="text"
+                   @click="onDownloadRecordClick">
+          下载录音
+        </el-button>
+        &nbsp;
+        <span v-if="fileSize">
+          {{fileSize}}kb
+        </span>
+      </div>
     </div>
     <van-form validate-first
               style="margin-top:8px"
@@ -102,7 +114,7 @@
                      :disabled="posting"
                      :type="recording ? 'danger':'primary'"
                      @click="onRecordStart">
-            {{recording ? 'STOP':'START'}}
+            {{recording ? 'STOP': form.sound_file ? 'RESTART':'START'}}
             <van-icon v-if="recording"
                       name="stop-circle-o" />
           </el-button>
@@ -112,14 +124,23 @@
                      @click="onCancelClick">
             CANCEL
           </el-button>
-          <el-button v-if="form.sound_file"
-                     size="small"
-                     type="primary"
-                     @click="onDownloadRecordClick">
-            下载录音
-          </el-button>
         </template>
       </van-field>
+      <div v-if="backUrl"
+           class="back-video video-ppo">
+        <audio :src="backUrl"
+               controls />
+        <div>
+          <el-button v-if="resFile"
+                     size="small"
+                     type="text"
+                     @click="onDownloadResultClick">
+            下载结果
+          </el-button>
+          &nbsp;
+          <span v-if="resSize">{{resSize}}kb</span>
+        </div>
+      </div>
       <div class="submit-button">
         <van-button class="van-button-r4"
                     block
@@ -127,27 +148,10 @@
                     :loading="posting"
                     :disabled="!form.sound_file"
                     native-type="submit">
-          【{{browerType}}】发 送 <span v-if="fileSize">({{fileSize}}kb)</span>
+          【{{browerType}}】发 送
         </van-button>
       </div>
-      <div v-if="backUrl"
-           class="back-video video-ppo">
-        <el-button v-if="resFile"
-                   size="small"
-                   type="success"
-                   @click="onDownloadResultClick">
-          下载结果
-        </el-button>
-        <audio :src="backUrl"
-               controls />
-        <span v-if="resSize">({{resSize}}kb)</span>
-      </div>
     </van-form>
-    <van-button v-if="false"
-                type="primary"
-                @click="downloadFile">
-      下载
-    </van-button>
     <div v-if="resData"
          class="resData">
       {{resData}}
@@ -168,6 +172,13 @@ const CancelToken = axios.CancelToken
 const proxyAPI = 'https://audio.h5lego.cn/audioapi'
 const isHttps = () => {
   return location.protocol === 'https:'
+}
+const formateFileSize = size => {
+  const kb = size / 1024
+  if (kb > 800) {
+    return (kb / 1024).toFixed(2)
+  }
+  return kb.toFixed(2)
 }
 export default {
   components: {},
@@ -291,7 +302,7 @@ export default {
             const file = blobToFile(blob, `${Date.now()}.${audoType.suffix}`)
             console.error('file', file)
             this.form.sound_file = file
-            this.fileSize = (file.size / 1024).toFixed(2)
+            this.fileSize = formateFileSize(file.size)
             Toast('录音结束!')
           } else {
             Toast('录音无效!')
@@ -368,7 +379,7 @@ export default {
         const resFile = blobToFile(blob, `${Date.now()}.mpeg`)
         const resSize = resFile ? resFile.size : 0
         if (resSize) {
-          this.resSize = resSize
+          this.resSize = formateFileSize(resSize)
           this.resFile = resFile
         } else {
           Toast.fail('响应失败，返回内容为空!')
@@ -467,14 +478,19 @@ export default {
   padding: 16px 0;
 }
 .video-ppo {
+  margin-top: 8px;
   width: 100%;
-  height: 60px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   audio {
     height: 38px;
   }
+  border: 1px solid #0fb6c6;
+  border-radius: 4px;
+  padding: 10px;
+  font-size: 12px;
 }
 .resData {
   box-sizing: border-box;
@@ -483,16 +499,19 @@ export default {
   max-height: 500px;
   overflow-x: hidden;
   overflow-y: auto;
-  border: 1px solid #acacac;
+  border: 1px solid #c60c0c;
   border-radius: 4px;
 }
 .url {
-  padding: 16px;
+  padding: 5px;
   border: 1px solid #acacac;
   border-radius: 4px;
   overflow: hidden;
+  font-size: 12px;
+  margin: 0px;
 }
 .back-video {
+  margin-top: 8px;
   border: 1px solid #0fb6c6;
   border-radius: 4px;
 }
