@@ -368,12 +368,13 @@ export default {
         forbidClick: false,
         message: '请求发送中...'
       })
-      const { path, host, sound_file } = form
+      const { path, host, sound_file, user_id, conversation_id } = form
       const audoType = this.audoType
       const useProxy = this.useProxy
+      localStorage.setItem('user_id', user_id)
+      localStorage.setItem('conversation_id', conversation_id)
       const url = useProxy ? `${proxyAPI}/${path}?audo_type=${audoType}` : `${host}/${path}?audo_type=${audoType}`
       const formData = new FormData()
-      console.error('-- sound_file --', sound_file.size)
       formData.append('sound_file', sound_file)
       // this.saveAudio(sound_file)
       const keys = Object.keys(form)
@@ -447,6 +448,10 @@ export default {
   mounted() {
     this.browerType = getBrowserType()
     let audoType = 'audio/webm'
+    const user_id = localStorage.getItem('user_id') || 'mihua001'
+    const conversation_id = localStorage.getItem('conversation_id') || ''
+    this.form.user_id = user_id
+    this.form.conversation_id = conversation_id
     switch (this.browerType) {
       case 'Firefox':
         audoType = 'audio/ogg'
