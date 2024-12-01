@@ -25,7 +25,7 @@
     </div>
     <van-form validate-first
               style="margin-top:8px"
-              label-width="8.2em"
+              label-width="5.2em"
               @submit="onSubmit"
               @failed="onFailed">
       <van-field name="useProxy"
@@ -93,7 +93,7 @@
       </van-field>
       <van-field v-model="form.user_id"
                  name="user_id"
-                 label="user_id"
+                 label="用户ID"
                  placeholder="user_id"
                  required
                  clearable
@@ -101,7 +101,7 @@
       </van-field>
       <van-field v-model="form.conversation_id"
                  name="conversation_id"
-                 label="conversation_id"
+                 label="会话ID"
                  placeholder="conversation_id"
                  clearable>
         <template #button>
@@ -114,7 +114,7 @@
         </template>
       </van-field>
       <van-field name="sound_file"
-                 label="sound_file"
+                 label="录音文件"
                  placeholder="sound_file"
                  clearable>
         <template #input>
