@@ -104,6 +104,14 @@
                  label="conversation_id"
                  placeholder="conversation_id"
                  clearable>
+        <template #button>
+          <el-button class="location-button"
+                     size="mini"
+                     :disabled="!form.conversation_id"
+                     @click="onCopyClick(form.conversation_id,$event)">
+            <i class="el-icon-copy-document"></i>
+          </el-button>
+        </template>
       </van-field>
       <van-field name="sound_file"
                  label="sound_file"
@@ -164,6 +172,7 @@
 export function blobToFile(blob, fileName) {
   return new File([blob], fileName, { type: blob.type })
 }
+import clip from '@/utils/clipboard.js'
 import { getBrowserType } from '@/utils/lib.js'
 import request from '@/utils/request/index.js'
 import { Toast, Notify } from 'vant'
@@ -239,6 +248,15 @@ export default {
     }
   },
   methods: {
+    onCopyClick(content, event) {
+      clip(content, event, back => {
+        if (back.type === 'error') {
+          Toast('复制失败!')
+        } else {
+          Toast('复制成功!')
+        }
+      })
+    },
     onCancelClick() {
       Toast.clear()
       this.stopRequest()
@@ -522,5 +540,14 @@ export default {
   box-sizing: border-box;
   text-align: center;
   font-size: 12px;
+}
+.location-button {
+  padding: 0px;
+  width: 32px;
+  height: 28px;
+  background: #e7f8f9;
+  border-radius: 6px;
+  border: none;
+  color: #17bac4;
 }
 </style>
