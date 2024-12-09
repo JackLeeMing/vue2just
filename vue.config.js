@@ -12,13 +12,7 @@ module.exports = defineConfig({
   transpileDependencies: true,
   outputDir: 'docker/dist',
   devServer: {
-    host: '0.0.0.0',
-    proxy: {
-      '/audioapi/dev/agent/speak': {
-        target: 'http://121.43.189.187:8080/dev/agent/speak',
-        changeOrigin: true
-      }
-    }
+    host: '0.0.0.0'
   },
   chainWebpack: config => {
     config.module.rules.delete('svg')

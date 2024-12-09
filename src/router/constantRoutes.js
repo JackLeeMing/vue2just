@@ -2,7 +2,7 @@ const routes = [
   {
     path: '/',
     name: 'Index',
-    redirect: '/audio'
+    redirect: '/test'
   },
   {
     path: '/test',
@@ -13,6 +13,16 @@ const routes = [
     path: '/audio',
     name: 'TestAudio',
     component: () => import(/* webpackChunkName: "testAudio" */ '@/page/audio/index.vue')
+  },
+  {
+    path: '/single',
+    name: 'Single',
+    component: () => import(/* webpackChunkName: "single" */ '@/page/single/index.vue')
+  },
+  {
+    path: '/heavy',
+    name: 'Heavy',
+    component: () => import(/* webpackChunkName: "heavy" */ '@/page/heavy/index.vue')
   },
   {
     path: '/404',

@@ -14,7 +14,8 @@ import {
   Empty,
   Table,
   TableColumn,
-  Card
+  Card,
+  Pagination
 } from 'element-ui'
 const elementComponents = {
   Form,
@@ -26,7 +27,8 @@ const elementComponents = {
   Empty,
   Table,
   TableColumn,
-  Card
+  Card,
+  Pagination
 }
 Object.keys(elementComponents).forEach(key => {
   const comp = elementComponents[key]

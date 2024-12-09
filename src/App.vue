@@ -50,6 +50,15 @@ export default {
     }
   },
   created() {
+    const obj = Object.create(null)
+    obj.age = 26
+    obj.name = 'Tom'
+    obj.arr = [1, 2, 3]
+    obj.toString = () => {
+      return '{😄}'
+    }
+    window.__testData = obj
+    window.__array = [1, 2, 3, 4]
     this.watchToken()
   },
   mounted() {

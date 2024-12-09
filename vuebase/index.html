@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue 2</title>
+</head>
+
+<body>
+    <div id="appRoot">
+    </div>
+    <script>
+        const obj = Object.create(null)
+        obj.age = 26
+        obj.name = 'Tom'
+        obj.arr = [1, 2, 3]
+        obj.toString = function () {
+            return '{😄}'
+        }
+        window.__testData = { age: 12, name: 'Jack' }
+        Object.defineProperty(obj, 'name', {
+            configurable: false
+        })
+        window.__array = [1, 2, 3, 4]
+    </script>
+    <script type="module">
+        import './src/main.js'
+    </script>
+</body>
+
+</html>

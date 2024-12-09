@@ -10,6 +10,9 @@ import './style/element-variables.scss'
 import '@vant/touch-emulator'
 import '@/icons/index'
 
+import styles from '@/style/test.module.scss'
+console.log(styles)
+
 Vue.config.productionTip = false
 
 //首先我们获得视口高度并将其乘以1%以获得1vh单位的值
@@ -25,7 +28,8 @@ window.addEventListener('resize', () => {
 
 const app = new Vue({
   data: {
-    bus: new Vue()
+    bus: new Vue(),
+    count: 121
   },
   router,
   store,

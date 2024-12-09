@@ -1,12 +1,12 @@
 {
-    "name": "cmd-edge-swift",
+    "name": "cmd-audio",
     "version": "0.1.0",
     "private": true,
     "scripts": {
         "build": "cross-env PROJECT_ENV=production vue-cli-service build",
         "lint": "vue-cli-service lint",
-        "dev": "cross-env PROJECT_ENV=develop vue-cli-service serve",
-        "pro": "cross-env PROJECT_ENV=production vue-cli-service serve"
+        "dev": "PORT=8090 cross-env PROJECT_ENV=develop vue-cli-service serve",
+        "pro": "PORT=8091 cross-env PROJECT_ENV=production vue-cli-service serve"
     },
     "dependencies": {
         "@vant/touch-emulator": "^1.4.0",
