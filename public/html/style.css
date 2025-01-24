@@ -1,0 +1,340 @@
+/*：源代码唯一下载链接: http://www.bootstrapmb.com/item/4646(当前备注仅在演示里出现，下载源码不包含)*/
+* {
+    border: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: currentColor;
+    color: #242424;
+    overflow: hidden;
+}
+
+.logo {
+    font-size: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 30em;
+    height: 30em;
+    transform: translate(-50%, -50%);
+    transform-style: preserve-3d;
+    perspective: 30em;
+    perspective-origin: 0% 0%;
+}
+
+.ring, .e {
+    border-radius: 50%;
+    position: absolute;
+}
+
+.ring {
+    animation: ring 4s linear infinite;
+    box-shadow: 0 0 0 1.5em #e7e7e7 inset;
+    width: 100%;
+    height: 100%;
+    transform: scale(1) rotateZ(-45deg) rotateX(0);
+    z-index: 1;
+}
+
+.e {
+    background: linear-gradient(#00d8fd, #006ceb);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    top: 1em;
+    left: 1em;
+    width: calc(100% - 2em);
+    height: calc(100% - 2em);
+}
+
+.upper-gap, .lower-gap {
+    animation: gapA 4s linear infinite;
+    background: currentColor;
+    width: 10.6em;
+    height: 5em;
+    transform: scale(0);
+}
+
+.upper-gap {
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+    order: 1;
+}
+
+.lower-gap {
+    border-radius: 0 0 50% 50% / 0 0 100% 100%;
+    order: 3;
+}
+
+.lower-gap:before {
+    animation: gapB 4s linear infinite;
+    background: inherit;
+    content: "";
+    display: block;
+    margin-left: 6em;
+    width: 14.3em;
+    height: 2.7em;
+    transform: scaleY(0);
+    transform-origin: 50% 0;
+}
+
+.ticks, .tick {
+    position: absolute;
+}
+
+.ticks {
+    animation: ticks 4s linear infinite;
+    order: 4;
+    width: calc(100% - 3em);
+    height: calc(100% - 3em);
+}
+
+.tick {
+    background: linear-gradient(90deg, #fff 2em, #fff0 2em, #fff0 calc(100% - 2em), #fff calc(100% - 2em));
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 0.2em;
+}
+
+.tick:nth-child(even) {
+    background: linear-gradient(90deg, #fff 1em, #fff0 1em, #fff0 calc(100% - 1em), #fff calc(100% - 1em));
+}
+
+.tick:nth-child(2) {
+    transform: translateY(-50%) rotate(5deg);
+}
+
+.tick:nth-child(3) {
+    transform: translateY(-50%) rotate(10deg);
+}
+
+.tick:nth-child(4) {
+    transform: translateY(-50%) rotate(15deg);
+}
+
+.tick:nth-child(5) {
+    transform: translateY(-50%) rotate(20deg);
+}
+
+.tick:nth-child(6) {
+    transform: translateY(-50%) rotate(25deg);
+}
+
+.tick:nth-child(7) {
+    transform: translateY(-50%) rotate(30deg);
+}
+
+.tick:nth-child(8) {
+    transform: translateY(-50%) rotate(35deg);
+}
+
+.tick:nth-child(9) {
+    transform: translateY(-50%) rotate(40deg);
+}
+
+.tick:nth-child(10) {
+    transform: translateY(-50%) rotate(45deg);
+}
+
+.tick:nth-child(11) {
+    transform: translateY(-50%) rotate(50deg);
+}
+
+.tick:nth-child(12) {
+    transform: translateY(-50%) rotate(55deg);
+}
+
+.tick:nth-child(13) {
+    transform: translateY(-50%) rotate(60deg);
+}
+
+.tick:nth-child(14) {
+    transform: translateY(-50%) rotate(65deg);
+}
+
+.tick:nth-child(15) {
+    transform: translateY(-50%) rotate(70deg);
+}
+
+.tick:nth-child(16) {
+    transform: translateY(-50%) rotate(75deg);
+}
+
+.tick:nth-child(17) {
+    transform: translateY(-50%) rotate(80deg);
+}
+
+.tick:nth-child(18) {
+    transform: translateY(-50%) rotate(85deg);
+}
+
+.tick:nth-child(19) {
+    transform: translateY(-50%) rotate(90deg);
+}
+
+.tick:nth-child(20) {
+    transform: translateY(-50%) rotate(95deg);
+}
+
+.tick:nth-child(21) {
+    transform: translateY(-50%) rotate(100deg);
+}
+
+.tick:nth-child(22) {
+    transform: translateY(-50%) rotate(105deg);
+}
+
+.tick:nth-child(23) {
+    transform: translateY(-50%) rotate(110deg);
+}
+
+.tick:nth-child(24) {
+    transform: translateY(-50%) rotate(115deg);
+}
+
+.tick:nth-child(25) {
+    transform: translateY(-50%) rotate(120deg);
+}
+
+.tick:nth-child(26) {
+    transform: translateY(-50%) rotate(125deg);
+}
+
+.tick:nth-child(27) {
+    transform: translateY(-50%) rotate(130deg);
+}
+
+.tick:nth-child(28) {
+    transform: translateY(-50%) rotate(135deg);
+}
+
+.tick:nth-child(29) {
+    transform: translateY(-50%) rotate(140deg);
+}
+
+.tick:nth-child(30) {
+    transform: translateY(-50%) rotate(145deg);
+}
+
+.tick:nth-child(31) {
+    transform: translateY(-50%) rotate(150deg);
+}
+
+.tick:nth-child(32) {
+    transform: translateY(-50%) rotate(155deg);
+}
+
+.tick:nth-child(33) {
+    transform: translateY(-50%) rotate(160deg);
+}
+
+.tick:nth-child(34) {
+    transform: translateY(-50%) rotate(165deg);
+}
+
+.tick:nth-child(35) {
+    transform: translateY(-50%) rotate(170deg);
+}
+
+.tick:nth-child(36) {
+    transform: translateY(-50%) rotate(175deg);
+}
+
+.dial {
+    animation: dial 4s linear infinite;
+    background: linear-gradient(90deg, #fff 50%, #f01 50%);
+    -webkit-clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    order: 2;
+    transform: rotate(-45deg);
+    width: 100%;
+    height: 3.96em;
+}
+
+@keyframes ring {
+    from, 25%, 85%, to {
+        box-shadow: 0 0 1em #fff0 inset, 0 0 0 1.5em #e7e7e7 inset;
+        transform: scale(1) rotateZ(-45deg) rotateX(0);
+    }
+
+    30% {
+        box-shadow: 0 1em 1em #fff7 inset, 0 1em 0 1.5em #ffcd3b inset;
+        transform: scale(1.25) rotateZ(-45deg) rotateX(-47deg);
+    }
+
+    35% {
+        box-shadow: 0 1em 1em #fff7 inset, 0 1em 0 1.5em #ffcd3b inset;
+        transform: scale(1.25) rotateZ(-45deg) rotateX(-40deg);
+    }
+
+    40%, 80% {
+        box-shadow: 0 1em 1em #fff7 inset, 0 1em 0 1.5em #ffcd3b inset;
+        transform: scale(1.25) rotateZ(-45deg) rotateX(-42deg);
+    }
+}
+
+@keyframes gapA {
+    from, 30%, 85%, to {
+        transform: scale(0);
+    }
+
+    33% {
+        transform: scale(1.25);
+    }
+
+    36%, 80% {
+        transform: scale(1);
+    }
+}
+
+@keyframes gapB {
+    from, 37%, 79%, to {
+        transform: scaleY(0);
+    }
+
+    39%, 77% {
+        transform: scaleY(1);
+    }
+}
+
+@keyframes dial {
+    from, 25%, to {
+        opacity: 1;
+        transform: rotate(-45deg);
+    }
+
+    30%, 85% {
+        opacity: 0;
+        transform: rotate(0deg);
+    }
+
+    90% {
+        opacity: 1;
+        transform: rotate(0deg);
+    }
+
+    93.3% {
+        opacity: 1;
+        transform: rotate(-51deg);
+    }
+
+    96.7% {
+        transform: rotate(-42deg);
+    }
+}
+
+@keyframes ticks {
+    from, 25%, 90%, to {
+        transform: scale(1);
+    }
+
+    30%, 85% {
+        transform: scale(0);
+    }
+}
+
+/*：源代码唯一下载链接: http://www.bootstrapmb.com/item/4646(当前备注仅在演示里出现，下载源码不包含)*/

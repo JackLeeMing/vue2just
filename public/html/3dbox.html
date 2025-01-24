@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D box</title>
+</head>
+<style>
+    * {
+        margin: 0px;
+        padding: 0px;
+    }
+
+    @keyframes rotate {
+        0% {
+            transform: rotateY(45deg) rotateX(0deg);
+        }
+
+        30% {
+            transform: rotateY(0deg) rotateX(45deg);
+        }
+
+        50% {
+            transform: rotateY(-45deg) rotateX(0deg);
+        }
+
+
+        70% {
+            transform: rotateY(0deg) rotateX(4-5deg);
+        }
+
+        100% {
+            transform: rotateY(0deg) rotateX(0deg);
+        }
+    }
+
+    .container {
+        position: absolute;
+        width: 400px;
+        height: 400px;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        perspective: 800px;
+    }
+
+    .content {
+        position: relative;
+        transform-style: preserve-3d;
+        /* animation-name: rotate;
+        animation-duration: 2s;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite; */
+        transition: transform 6s;
+    }
+
+    .content:hover {
+        transform: rotateY(360deg) rotateX(360deg)
+    }
+
+    li {
+        position: absolute;
+        list-style: none;
+        width: 400px;
+        height: 400px;
+        line-height: 400px;
+        text-align: center;
+        color: white;
+        font-size: 65px;
+    }
+
+    .front {
+        background-color: #faca;
+        transform: translateZ(200px);
+    }
+
+    .back {
+        background-color: #fcaa;
+        transform: rotateY(180deg) translateZ(200px);
+    }
+
+    .left {
+        background-color: #fdfa;
+        transform: rotateY(90deg) translateZ(200px);
+    }
+
+    .right {
+        background-color: #f5fa;
+        /* transform: rotateY(90deg) translateZ(-200px); */
+        transform: rotateY(-90deg) translateZ(200px);
+    }
+
+    .top {
+        background-color: #0cda;
+        transform: rotateX(90deg) translateZ(200px);
+    }
+
+    .bottom {
+        background-color: #35fa;
+        transform: rotateX(-90deg) translateZ(200px);
+    }
+</style>
+
+<body>
+    <div class="container">
+        <ul class="content">
+            <li class="front">1</li>
+            <li class="back">6</li>
+            <li class="left">2</li>
+            <li class="right">5</li>
+            <li class="top">3</li>
+            <li class="bottom">4</li>
+        </ul>
+    </div>
+</body>
+
+</html>

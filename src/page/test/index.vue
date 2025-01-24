@@ -44,7 +44,6 @@ import Person from './person'
 import TestData from './components/TestData.vue'
 import TestData2 from './components/TestData2.vue'
 import app from '@/main.js'
-import data from '@/utils/testModule.js'
 export default {
   components: {
     TestData,

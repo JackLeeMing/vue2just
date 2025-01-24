@@ -2,7 +2,32 @@ const routes = [
   {
     path: '/',
     name: 'Index',
-    redirect: '/test'
+    redirect: '/taobao'
+  },
+  {
+    path: '/taobao',
+    name: 'Taobao',
+    component: () => import(/* webpackChunkName: "taobao" */ '@/page/taobao/index.vue')
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: () => import(/* webpackChunkName: "Login" */ '@/page/login/index.vue')
+  },
+  {
+    path: '/zdog',
+    name: 'ZDog',
+    component: () => import(/* webpackChunkName: "zdog" */ '@/page/zdog/index.vue')
+  },
+  {
+    path: '/card',
+    name: 'CardPage',
+    component: () => import(/* webpackChunkName: "cardPage" */ '@/page/card/index.vue')
+  },
+  {
+    path: '/css',
+    name: 'CssPage',
+    component: () => import(/* webpackChunkName: "cssPage" */ '@/page/css/index.vue')
   },
   {
     path: '/test',

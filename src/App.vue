@@ -78,7 +78,6 @@ export default {
   width: 100%;
   height: 100vh;
   color: #323233;
-  height: calc(var(--vh, 1vh) * 100); /* 需要多少vh就乘多少值,100vh就乘100 */
 }
 .van-toast {
   width: 120px !important;
