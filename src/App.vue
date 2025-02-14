@@ -64,8 +64,11 @@ export default {
 </script>
 
 <style lang="scss">
+:root {
+  --colorPrimary: #ff8151;
+}
 #app {
-  background: linear-gradient(180deg, #d8dde9 0%, #e1e4ea 100%);
+  background: white;
   width: 100%;
   height: 100vh;
   color: #323233;

@@ -1,37 +1,54 @@
+import {
+  ActionSheet,
+  Button,
+  Cell,
+  CellGroup,
+  Dialog,
+  Icon,
+  List,
+  Loading,
+  Pagination,
+  Popover,
+  Popup,
+  Tab,
+  Tabbar,
+  TabbarItem,
+  Tabs,
+  Tag,
+  Image as VanImage
+} from 'vant'
 import Vue from 'vue'
-import { Button } from 'vant'
-import { Tabbar, TabbarItem } from 'vant'
-import { Tab, Tabs } from 'vant'
-import { Pagination } from 'vant'
-import { Image as VanImage, Loading } from 'vant'
-import { Cell, CellGroup } from 'vant'
-import { Dialog } from 'vant'
-import { Popover } from 'vant'
-import { Popup } from 'vant'
-import { Tag } from 'vant'
-import { List } from 'vant'
-import { Icon } from 'vant'
-import { ActionSheet } from 'vant'
 
-import { DatetimePicker } from 'vant'
-import { NavBar } from 'vant'
+import { DatetimePicker, NavBar } from 'vant'
 
-import { Form } from 'vant'
-import { Field } from 'vant'
-import { Swipe, SwipeItem } from 'vant'
-import { Lazyload } from 'vant'
-import { Divider, PullRefresh } from 'vant'
-import { Switch } from 'vant'
-import { Picker } from 'vant'
-import { Grid, GridItem, Badge } from 'vant'
-import { RadioGroup, Radio } from 'vant'
-import { Stepper } from 'vant'
-import { NoticeBar } from 'vant'
-import { Checkbox, CheckboxGroup } from 'vant'
-import { SwipeCell, Card } from 'vant'
-import { Uploader } from 'vant'
-import { Progress, Search, IndexBar, IndexAnchor } from 'vant'
-import { CountDown } from 'vant'
+import {
+  Badge,
+  Card,
+  Checkbox,
+  CheckboxGroup,
+  CountDown,
+  Divider,
+  Field,
+  Form,
+  Grid,
+  GridItem,
+  IndexAnchor,
+  IndexBar,
+  Lazyload,
+  NoticeBar,
+  Picker,
+  Progress,
+  PullRefresh,
+  Radio,
+  RadioGroup,
+  Search,
+  Stepper,
+  Swipe,
+  SwipeCell,
+  SwipeItem,
+  Switch,
+  Uploader
+} from 'vant'
 
 Vue.use(CountDown)
 Vue.use(IndexBar)

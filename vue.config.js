@@ -169,11 +169,11 @@ module.exports = defineConfig({
         lessOptions: {
           modifyVars: {
             // 直接覆盖变量
-            green: '#17BAC4',
-            'checkbox-checked-icon-color': '#17BAC4',
-            'radio-checked-icon-color': '#17BAC4',
+            green: '#FF8151',
+            'checkbox-checked-icon-color': '#FF8151',
+            'radio-checked-icon-color': '#FF8151',
             'button-default-color': '#646565',
-            'tag-primary-color': '#17BAC4',
+            'tag-primary-color': '#FF8151',
             'button-default-background-color': '#F3F3F3'
             // 或者可以通过 less 文件覆盖（文件路径为绝对路径）
             // hack: 'true; @import "your-less-file-path.less";'
@@ -190,13 +190,13 @@ module.exports = defineConfig({
   },
   pwa: {
     name: 'config audio',
-    themeColor: '#0fb6c6',
+    themeColor: '#FF8151',
     backgroundColor: '#fff',
     manifestOptions: {
       orientation: 'portrait-primary',
       start_url: '/',
       background_color: '#ffffff',
-      theme_color: '#0fb6c6',
+      theme_color: '#FF8151',
       description: 'config audio',
       display: 'minimal-ui'
     },
