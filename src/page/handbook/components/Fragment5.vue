@@ -24,8 +24,8 @@
     </p>
     <div class="image image1"
          style="margin-top:1rem"
-         @click="onPreViewClick('/bearbuddy/fp5_1.png')">
-      <img src="/bearbuddy/fp5_1.png"
+         @click="onPreViewClick('/img/bearbuddy/fp5_1.png')">
+      <img src="/img/bearbuddy/fp5_1.png"
            draggable="false" />
     </div>
     <p class="desc">
@@ -33,8 +33,8 @@
     </p>
     <div class="image image1"
          style="margin-top:1rem"
-         @click="onPreViewClick('/bearbuddy/fp5_2.png')">
-      <img src="/bearbuddy/fp5_2.png"
+         @click="onPreViewClick('/img/bearbuddy/fp5_2.png')">
+      <img src="/img/bearbuddy/fp5_2.png"
            draggable="false" />
     </div>
   </div>

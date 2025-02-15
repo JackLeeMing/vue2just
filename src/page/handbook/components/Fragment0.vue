@@ -10,8 +10,8 @@
     </p>
     <div class="desc-image van-hairline--bottom"></div>
     <div class="image"
-         @click="onPreViewClick('/bearbuddy/fp1_1.png')">
-      <img src="/bearbuddy/fp1_1.png"
+         @click="onPreViewClick('/img/bearbuddy/fp1_1.png')">
+      <img src="/img/bearbuddy/fp1_1.png"
            draggable="false" />
     </div>
   </div>

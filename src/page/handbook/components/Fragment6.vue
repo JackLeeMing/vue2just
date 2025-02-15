@@ -11,8 +11,8 @@
     </p>
     <div class="image image1"
          style="margin-top:1rem"
-         @click="onPreViewClick('/bearbuddy/fp6_1.png')">
-      <img src="/bearbuddy/fp6_1.png"
+         @click="onPreViewClick('/img/bearbuddy/fp6_1.png')">
+      <img src="/img/bearbuddy/fp6_1.png"
            draggable="false" />
     </div>
     <div class="fragment-title"

@@ -8,7 +8,7 @@
     </p>
     <video style="width: 100%; height: 200px; margin-top: 1rem; object-fit: cover"
            controls>
-      <source src="/bearbuddy/movie.mp4"
+      <source src="/img/bearbuddy/movie.mp4"
               type="video/mp4" />
       您的浏览器不支持 HTML5 video 标签。
     </video>
@@ -18,7 +18,7 @@
        style="margin-top: 1rem">请参考如下视频进行设备连接，连接成功后就能个性化定制互动体验。</p>
     <video style="width: 100%; height: 200px; margin-top:1rem; object-fit: cover"
            controls>
-      <source src="/bearbuddy/movie.mp4"
+      <source src="/img/bearbuddy/movie.mp4"
               type="video/mp4" />
       您的浏览器不支持 HTML5 video 标签。
     </video>

@@ -10,8 +10,8 @@
     </p>
     <div class="image image1"
          style="margin-top:1rem"
-         @click="onPreViewClick('/bearbuddy/fp3_1.png')">
-      <img src="/bearbuddy/fp3_1.png" />
+         @click="onPreViewClick('/img/bearbuddy/fp3_1.jpg')">
+      <img src="/img/bearbuddy/fp3_1.jpg" />
     </div>
     <div class="fragment-title"
          style="margin-top: 1rem">初始电量</div>
@@ -21,8 +21,8 @@
     </p>
     <div class="image image2"
          style="margin-top:1rem"
-         @click="onPreViewClick('/bearbuddy/fp3_2.png')">
-      <img src="/bearbuddy/fp3_2.png"
+         @click="onPreViewClick('/img/bearbuddy/fp3_2.jpg')">
+      <img src="/img/bearbuddy/fp3_2.jpg"
            draggable="false" />
     </div>
     <div class="fragment-title"
@@ -33,8 +33,8 @@
     </p>
     <div class="image image3"
          style="margin-top: 1rem"
-         @click="onPreViewClick('/bearbuddy/frq3.png')">
-      <img src="/bearbuddy/frq3.png"
+         @click="onPreViewClick('/img/bearbuddy/frq3.png')">
+      <img src="/img/bearbuddy/frq3.png"
            draggable="false" />
     </div>
   </div>
@@ -69,9 +69,15 @@ export default {
 }
 .image1 {
   position: relative;
+  img {
+    width: 100%;
+  }
 }
 
 .image2 {
   position: relative;
+  img {
+    width: 100%;
+  }
 }
 </style>

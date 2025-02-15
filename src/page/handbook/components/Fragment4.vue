@@ -8,8 +8,8 @@
        style="margin-top:1rem">设备默认处于关闭状态，短按一次开关按钮开启设备，此时设备会发出语音提示。</p>
     <div class="image image1"
          style="margin-top:1rem"
-         @click="onPreViewClick('/bearbuddy/fp4_1.png')">
-      <img src="/bearbuddy/fp4_1.png"
+         @click="onPreViewClick('/img/bearbuddy/fp3_1.jpg')">
+      <img src="/img/bearbuddy/fp3_1.jpg"
            draggable="false" />
     </div>
     <div class="fragment-title"
@@ -22,8 +22,8 @@
     </p>
     <div class="image image2"
          style="margin-top:2rem"
-         @click="onPreViewClick('/bearbuddy/fp4_2.png')">
-      <img src="/bearbuddy/fp4_2.png"
+         @click="onPreViewClick('/img/bearbuddy/fp4_2.png')">
+      <img src="/img/bearbuddy/fp4_2.png"
            draggable="false" />
     </div>
   </div>
@@ -48,6 +48,11 @@ export default {
 }
 .image {
   position: relative;
+}
+.image1 {
+  img {
+    width: 100%;
+  }
 }
 .desc {
   /* text */

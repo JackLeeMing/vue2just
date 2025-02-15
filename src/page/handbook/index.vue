@@ -94,7 +94,6 @@ export default {
         if (swipper) {
           swipper.swipeTo({ index: index * 1 })
           swipper.swipeTo(index * 1)
-          console.error(index * 1)
         }
       })
     },
@@ -186,7 +185,7 @@ export default {
   font-family: 'PingFang SC';
   font-style: normal;
   font-weight: 600;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   color: #040000;
 }
 .bear-buddy-handbook {
