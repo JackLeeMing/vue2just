@@ -5,9 +5,9 @@
       <van-tag v-for="(feature, index) in features"
                :id="`tag-${index}`"
                :key="`tag-${feature.key}`"
-               :type="current === index ? 'primary':'danger'"
+               :type="current === index ? 'primary' : 'danger'"
                @click="onFeatureClick(feature, index)">
-        {{feature.label}}
+        {{ feature.label }}
       </van-tag>
     </div>
     <div class="handbook-content">
@@ -18,11 +18,12 @@
                  :show-indicators="false"
                  indicator-color="white"
                  @change="onSwiperChange">
-        <van-swipe-item v-for=" feature in features"
+        <van-swipe-item v-for="feature in features"
                         :key="`info-${feature.key}`">
           <component :is="`Fragment${feature.key}`" />
         </van-swipe-item>
       </van-swipe>
+      <div class="page-padding-bottom"></div>
     </div>
   </div>
 </template>
@@ -122,12 +123,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.test-wrapper {
-  width: 100vw;
-  height: 100vh;
-  background-color: aliceblue;
-}
+<style lang="scss">
 .bear-buddy-handbook {
   width: 100vw;
   height: 100vh;
@@ -139,60 +135,59 @@ export default {
 .handbook-top {
   box-sizing: border-box;
   width: 100%;
-  height: 56px;
-  padding-left: 16px;
-  padding-right: 16px;
+  height: 3.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 8px;
+  gap: 0.5rem;
   flex-wrap: nowrap;
   overflow-x: auto;
   overflow-y: hidden;
-  flex: 0 0 56px;
+  flex: 0 0 3.5rem;
 }
 .handbook-content {
-  margin-top: 8px;
+  margin-top: 0.5rem;
   box-sizing: border-box;
   width: 100%;
   flex: 1;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.page-padding-bottom {
+  width: 100%;
+  height: 2rem;
 }
 </style>
 <style lang="scss">
 .van-tag {
-  line-height: 26px;
-  height: 26px;
-  padding: 0 8px;
+  height: 1.8rem;
+  font-size: 0.75rem;
+  padding: 0 0.5rem;
   flex-shrink: 0;
   text-align: center;
-  display: inline-block;
+  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .van-tag--danger {
   background-color: #f3f3f3;
   color: rgba(0, 0, 0, 0.9);
 }
-.van-swipe {
-  height: 100%;
+.van-tag--primary {
+  color: white;
 }
 .fragment-title {
   /* text */
   width: 100%;
-  height: 24px;
-  line-height: 24px;
-  /* Mark/Large */
+  line-height: 1.5rem;
   font-family: 'PingFang SC';
   font-style: normal;
   font-weight: 600;
-  font-size: 16px;
-  /* identical to box height, or 150% */
+  font-size: 1.5rem;
   color: #040000;
-
-  /* Inside auto layout */
-  flex: none;
-  order: 0;
-  align-self: stretch;
-  flex-grow: 0;
-  z-index: 0;
 }
 .bear-buddy-handbook {
   p {
@@ -211,8 +206,8 @@ export default {
     box-sizing: border-box;
     overflow-x: hidden;
     overflow-y: auto;
-    padding-left: 16px;
-    padding-right: 16px;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
   .highlight {
     color: var(--colorPrimary);
@@ -224,5 +219,11 @@ export default {
       user-select: none;
     }
   }
+}
+::-webkit-scrollbar {
+  display: block;
+  width: 0px;
+  height: 0px;
+  display: none;
 }
 </style>

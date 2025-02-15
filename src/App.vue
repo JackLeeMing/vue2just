@@ -75,7 +75,7 @@ export default {
   height: calc(var(--vh, 1vh) * 100); /* 需要多少vh就乘多少值,100vh就乘100 */
 }
 .van-toast {
-  width: 120px !important;
+  width: 7.5rem !important;
 }
 .BMap_cpyCtrl {
   display: none !important;
@@ -84,9 +84,9 @@ export default {
   display: none !important;
 }
 .van-button {
-  border-radius: 4px !important;
+  border-radius: 0.25rem !important;
 }
 .van-button-r4 {
-  border-radius: 4px !important;
+  border-radius: 0.25rem !important;
 }
 </style>

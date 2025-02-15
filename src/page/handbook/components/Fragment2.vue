@@ -1,9 +1,5 @@
 <template>
   <div class="fragment fragment-2">
-    <!-- <div class="fragment-title"
-         style="margin-top:6px">
-      设备对话教程
-    </div> -->
     <van-cell title="硬件尺寸"
               label="80 mm×80 mm×25 mm，小巧轻便。" />
     <van-cell title="硬件重量"
@@ -26,21 +22,21 @@ export default {}
 <style lang="scss">
 .fragment-2 {
   .van-cell {
-    padding: 16px 0px;
+    padding: 1rem 0px;
     font-family: 'PingFang SC';
     font-style: normal;
     font-weight: 600;
-    font-size: 16px;
-    line-height: 24px;
+    font-size: 1rem;
+    line-height: 1.5rem;
     color: #040000;
     /* text */
   }
   .van-cell:first-child {
-    padding-top: 8px;
+    padding-top: 0.5rem;
   }
 
   .van-cell__label {
-    margin-top: 6px;
+    margin-top: 0.375rem;
     font-weight: normal;
   }
 }
