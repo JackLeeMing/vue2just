@@ -5,14 +5,14 @@
       查看对话记录
     </div>
     <p class="desc"
-       style="margin-top:0.75rem">
+       style="margin-top:1rem">
       进入“消息-查看更多聊天记录”界面。<br />
       您可以选择不同的日期，查看孩子与设备之间的对话内容。聊天记录我们将存储X天，该记录仅存储使用，不会外泄确保隐私安全。
     </p>
     <div class="image image1"
          style="margin-top:1rem"
-         @click="onPreViewClick('/bearbuddy/fp6.png')">
-      <img src="/bearbuddy/fp6.png"
+         @click="onPreViewClick('/bearbuddy/fp6_1.png')">
+      <img src="/bearbuddy/fp6_1.png"
            draggable="false" />
     </div>
     <div class="fragment-title"

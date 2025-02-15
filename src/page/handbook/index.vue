@@ -134,10 +134,10 @@ export default {
 }
 .handbook-top {
   box-sizing: border-box;
-  width: 100%;
+  width: calc(100% - 2rem);
   height: 3.5rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
   display: flex;
   align-items: center;
   justify-content: flex-start;

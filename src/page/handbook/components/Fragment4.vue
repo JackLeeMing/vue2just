@@ -5,25 +5,25 @@
       启动设备
     </div>
     <p class="desc"
-       style="margin-top:0.75rem">设备默认处于关闭状态，短按一次开关按钮开启设备，此时设备会发出语音提示。</p>
+       style="margin-top:1rem">设备默认处于关闭状态，短按一次开关按钮开启设备，此时设备会发出语音提示。</p>
     <div class="image image1"
-         style="margin-top:0.75rem"
-         @click="onPreViewClick('/bearbuddy/fp3.png')">
-      <img src="/bearbuddy/fp3.png"
+         style="margin-top:1rem"
+         @click="onPreViewClick('/bearbuddy/fp4_1.png')">
+      <img src="/bearbuddy/fp4_1.png"
            draggable="false" />
     </div>
     <div class="fragment-title"
-         style="margin-top:0.375rem">
+         style="margin-top:1rem">
       设备连接
     </div>
     <p class="desc"
-       style="margin-top:0.75rem">
+       style="margin-top:1rem">
       步骤一：打开小程序，点击“我的-连接设备”。
     </p>
     <div class="image image2"
-         style="margin-top:0.75rem"
-         @click="onPreViewClick('/bearbuddy/fp4.png')">
-      <img src="/bearbuddy/fp4.png"
+         style="margin-top:2rem"
+         @click="onPreViewClick('/bearbuddy/fp4_2.png')">
+      <img src="/bearbuddy/fp4_2.png"
            draggable="false" />
     </div>
   </div>
@@ -41,6 +41,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.fragment-4 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .image {
   position: relative;
 }

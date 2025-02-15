@@ -16,25 +16,25 @@
       音量控制
     </div>
     <p class="desc"
-       style="margin-top:0.75rem">
+       style="margin-top:1rem">
       1. 您可以通过语音指令调节设备的音量大小，例如说“声音大一点”或“声音小一点”，设备会根据指令调整音量。
     </p>
     <p class="desc">
       2. 您可以取出硬件设备，使用音量控制按钮调节音量
     </p>
     <div class="image image1"
-         style="margin-top:0.75rem"
-         @click="onPreViewClick('/bearbuddy/fp3.png')">
-      <img src="/bearbuddy/fp3.png"
+         style="margin-top:1rem"
+         @click="onPreViewClick('/bearbuddy/fp5_1.png')">
+      <img src="/bearbuddy/fp5_1.png"
            draggable="false" />
     </div>
     <p class="desc">
       3. 小程序也提供了音量调节功能，家长可以根据孩子的使用环境和需求，在小程序中精确调节音量大小。
     </p>
     <div class="image image1"
-         style="margin-top:0.75rem"
-         @click="onPreViewClick('/bearbuddy/fp5.png')">
-      <img src="/bearbuddy/fp5.png"
+         style="margin-top:1rem"
+         @click="onPreViewClick('/bearbuddy/fp5_2.png')">
+      <img src="/bearbuddy/fp5_2.png"
            draggable="false" />
     </div>
   </div>
